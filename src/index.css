@@ -1,3 +1,22 @@
+@import url("assets/fonts.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  @apply scroll-smooth;
+}
+
+a,
+button {
+  @apply transition-all;
+}
+
+a {
+  @apply text-gray-500;
+}
+
+footer a {
+  @apply hover:text-white;
+}
