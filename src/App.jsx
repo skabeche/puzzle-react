@@ -12,17 +12,13 @@ export default function App() {
   const [imagePuzzle, setImagePuzzle] = useState('');
 
   const newGame = () => {
-    let image = new Image();
-    image.onload = () => {
-      const puzzle = new Puzzle(image, difficulty);
+    const puzzle = new Puzzle(imagePuzzle, difficulty);
 
-      boardRef.current.appendChild(puzzle.create());
-    }
-    image.src = imagePuzzle;
+    boardRef.current.appendChild(puzzle.create());
   }
 
   const getOptions = (image, difficulty) => {
-    console.log(image, difficulty);
+    // console.log(image, difficulty);
     setDifficulty(difficulty)
     setImagePuzzle(image)
   }
