@@ -30,17 +30,24 @@ class Puzzle {
     }
 
     // Shuffle pieces.
-    // this.shuffle();
+    // console.log(puzzle.getElementsByTagName('img'));
+    // puzzle = this.shuffle(puzzle.getElementsByTagName('img'));
 
-    // console.log(puzzle);
 
     return puzzle;
 
   }
 
+  /**
+   * Randomize array element order.
+   * Fisher-Yates algorithm
+   * 
+   * @param {array} element
+   */
+  shuffle(element) {
+    for (let j, x, i = element.length; i; j = parseInt(Math.random() * i), x = element[--i], element[i] = element[j], element[j] = x);
 
-  shuffle() {
-    // code
+    return element;
   }
 
   /**

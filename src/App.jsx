@@ -19,8 +19,6 @@ export default function App() {
       boardRef.current.appendChild(puzzle.create());
     }
     image.src = imagePuzzle;
-    console.log(image);
-    console.log(boardRef);
   }
 
   const getOptions = (image, difficulty) => {
@@ -42,8 +40,8 @@ export default function App() {
         <h2>Puzzle</h2>
         <Nav />
 
-        <div ref={boardRef} className="flex">
-          <p>Please, start a new game</p>
+        <div ref={boardRef} className="[&_div]:grid [&_div]:grid-cols-2 w-[500px]">
+          {/* <p>Please, start a new game</p> */}
         </div>
 
         <div id="board">
