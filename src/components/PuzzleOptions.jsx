@@ -51,7 +51,6 @@ export const PuzzleOptions = ({ options }) => {
 
   useEffect(() => {
     options(image, difficulty);
-
   }, [image, difficulty, options])
 
   return (

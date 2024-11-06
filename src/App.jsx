@@ -1,35 +1,26 @@
-import { useRef, useState } from 'react'
+import { useState, useRef } from 'react'
 import { Header } from "./components/Header"
 import { Logo } from "./components/Logo"
 import { PuzzleOptions } from "./components/PuzzleOptions"
 import { Nav } from "./components/Nav"
 import { Footer } from "./components/Footer"
-import Puzzle from "./utils/puzzle"
-import { removeAllChilds } from "./helpers/dom"
+import Board from "./components/Board"
 
 export default function App() {
-  const boardRef = useRef(null);
+  const boardChildRef = useRef(null);
   const [difficulty, setDifficulty] = useState(4);
   const [imagePuzzle, setImagePuzzle] = useState('');
 
   const newGame = () => {
-    const puzzle = new Puzzle(imagePuzzle, difficulty);
-
-    // Remove previous game.
-    removeAllChilds(boardRef.current);
-    // Add pieces into board.
-    puzzle.create().forEach(piece => boardRef.current.appendChild(piece));
+    if (boardChildRef.current) {
+      // Call fuction in Board component.
+      boardChildRef.current.createPuzzle();
+    }
   }
 
   const getOptions = (image, difficulty) => {
     setDifficulty(difficulty)
     setImagePuzzle(image)
-  }
-
-  const gridColumns = {
-    4: 'grid-cols-2',
-    9: 'grid-cols-3',
-    16: 'grid-cols-4',
   }
 
   return (
@@ -45,17 +36,14 @@ export default function App() {
         <h2>Puzzle</h2>
         <Nav />
 
-        <div ref={boardRef} className={`grid ${gridColumns[difficulty]} w-[500px]`}>
-          {/* <p>Please, start a new game</p> */}
-        </div>
+        <Board ref={boardChildRef} image={imagePuzzle} difficulty={difficulty} />
 
-        <div id="board">
+        {/* <div id="board">
           <p>No puzzle</p>
-        </div>
+        </div> */}
       </section>
 
       <Footer />
-
     </>
   )
 }
