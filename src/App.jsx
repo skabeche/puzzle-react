@@ -5,6 +5,7 @@ import { PuzzleOptions } from "./components/PuzzleOptions"
 import { Nav } from "./components/Nav"
 import { Footer } from "./components/Footer"
 import Puzzle from "./utils/puzzle"
+import { removeAllChilds } from "./helpers/dom"
 
 export default function App() {
   const boardRef = useRef(null);
@@ -14,13 +15,21 @@ export default function App() {
   const newGame = () => {
     const puzzle = new Puzzle(imagePuzzle, difficulty);
 
-    boardRef.current.appendChild(puzzle.create());
+    // Remove previous game.
+    removeAllChilds(boardRef.current);
+    // Add pieces into board.
+    puzzle.create().forEach(piece => boardRef.current.appendChild(piece));
   }
 
   const getOptions = (image, difficulty) => {
-    // console.log(image, difficulty);
     setDifficulty(difficulty)
     setImagePuzzle(image)
+  }
+
+  const gridColumns = {
+    4: 'grid-cols-2',
+    9: 'grid-cols-3',
+    16: 'grid-cols-4',
   }
 
   return (
@@ -36,7 +45,7 @@ export default function App() {
         <h2>Puzzle</h2>
         <Nav />
 
-        <div ref={boardRef} className="[&_div]:grid [&_div]:grid-cols-2 w-[500px]">
+        <div ref={boardRef} className={`grid ${gridColumns[difficulty]} w-[500px]`}>
           {/* <p>Please, start a new game</p> */}
         </div>
 

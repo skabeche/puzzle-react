@@ -1,12 +1,23 @@
+/**
+ * Puzzle class to create and manage a puzzle from an image.
+ */
 class Puzzle {
 
+  /**
+   * Constructor.
+   * 
+   * @param {string} image - The URL of the image to use for the puzzle.
+   * @param {number} numPieces - The total number of pieces for the puzzle.
+   */
   constructor(image, numPieces) {
     this.image = image;
     this.numPieces = numPieces;
   }
 
   /**
-   * Create puzzle pieces.
+   * Create puzzle pieces and arrange them in a grid.
+   * 
+   * @return {HTMLElement} - A DOM element containing the shuffled puzzle pieces.
    */
   create() {
     // Create nodes in DOM.
@@ -30,8 +41,7 @@ class Puzzle {
     }
 
     // Shuffle pieces.
-    // console.log(puzzle.getElementsByTagName('img'));
-    // puzzle = this.shuffle(puzzle.getElementsByTagName('img'));
+    puzzle = this.shuffle(Array.from(puzzle.getElementsByTagName('img')));
 
     return puzzle;
 
@@ -41,7 +51,8 @@ class Puzzle {
    * Randomize array element order.
    * Fisher-Yates algorithm
    * 
-   * @param {array} element
+   * @param {Array} element - The array to shuffle.
+   * @return {Array} - The shuffled array.
    */
   shuffle(element) {
     for (let j, x, i = element.length; i; j = parseInt(Math.random() * i), x = element[--i], element[i] = element[j], element[j] = x);
@@ -50,16 +61,15 @@ class Puzzle {
   }
 
   /**
-   * Crop an image in n pieces.
+   * Crop an image into a smaller piece, representing a portion of the puzzle.
    * 
-   * @param {string} imageUrl
-   * @param {int} numRows
-   * @param {int} numCols
-   * @param {int} i
-   * @param {int} j
-   *
-   * @return {HTMLElement}
-  */
+   * @param {string} imageUrl - The URL of the full puzzle image.
+   * @param {number} numRows - Number of rows to divide the image into.
+   * @param {number} numCols - Number of columns to divide the image into.
+   * @param {number} i - Current row index of the piece.
+   * @param {number} j - Current column index of the piece.
+   * @return {HTMLElement} - An image element representing a cropped piece of the puzzle.
+   */
   cropImage(imageUrl, numRows, numCols, i, j) {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
