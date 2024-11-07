@@ -12,6 +12,11 @@ export const Board = ({ isNewGame, gameOptions }) => {
   };
   const [boardRef, pieces, setPieces] = useDragAndDrop([],
     {
+      draggingClass: "dragging",
+      dragPlaceholderClass: "drag-placeholder",
+      dropZoneClass: "drop-zone",
+    },
+    {
       plugins: [
         dropOrSwap({
           shouldSwap: () => {
@@ -35,14 +40,19 @@ export const Board = ({ isNewGame, gameOptions }) => {
   if (isNewGame) {
     // Remove previous game pieces.
     removeAllChilds(boardRef.current);
-    // Add new pieces into the board.
-    // Using map method returns image.src as empty and do not why yet.
-    pieces.forEach(piece => boardRef.current.appendChild(piece));
+    // Insert DOM as map method returns image.src as empty and do not why yet.
+    pieces.forEach((piece) => {
+      // Add new pieces into the board.
+      const container = document.createElement('div');
+      container.appendChild(piece);
+      boardRef.current.appendChild(container);
+      
+    });
   }
 
   return (
-    <div ref={boardRef} className={`grid ${gridColumns[gameOptions.difficulty]} w-[500px]`}>
-      <p>Please start a new game</p>
+    <div ref={boardRef} id="board" className={`grid ${gridColumns[gameOptions.difficulty]} w-[500px] my-8`}>
+      <p>Please <a href="#home">start a new game</a></p>
     </div>
   );
 };

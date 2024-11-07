@@ -19,6 +19,9 @@ export default {
       kaushan: ['Kaushan Script Regular', 'sans-serif'],
     },
     extend: {
+      fontFamily: {
+        sans: ['Open Sans', 'sans-serif'],
+      },
       colors: {
         gray: {
           DEFAULT: '#9e9e9e',
