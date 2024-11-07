@@ -51,7 +51,7 @@ export const Board = ({ isNewGame, gameOptions }) => {
   }
 
   return (
-    <div ref={boardRef} id="board" className={`grid ${gridColumns[gameOptions.difficulty]} w-[500px] my-8`}>
+    <div ref={boardRef} id="board" className={`grid ${gridColumns[gameOptions.difficulty]} w-[300px] lg:w-[600px] my-8`}>
       <p>Please <a href="#home">start a new game</a></p>
     </div>
   );
