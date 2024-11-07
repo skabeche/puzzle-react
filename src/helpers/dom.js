@@ -4,6 +4,8 @@
  * @param {HTMLElement} node
  */
 export function removeAllChilds(node) {
+ if (node === null) return;
+
   while (node.firstChild) {
     node.removeChild(node.firstChild);
   }

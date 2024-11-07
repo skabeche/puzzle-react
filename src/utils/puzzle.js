@@ -17,7 +17,7 @@ class Puzzle {
   /**
    * Create puzzle pieces and arrange them in a grid.
    * 
-   * @return {HTMLElement} - A DOM element containing the shuffled puzzle pieces.
+   * @return {Array} - Array containing the shuffled puzzle pieces.
    */
   create() {
     // Create nodes in DOM.

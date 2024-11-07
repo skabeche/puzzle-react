@@ -37,21 +37,20 @@ const images = [
   },
 ]
 
-export const PuzzleOptions = ({ options }) => {
-  const [difficulty, setDifficulty] = useState(4);
-  const [image, setImage] = useState('');
+export const PuzzleOptions = ({ getOptions }) => {
+  const [options, setOptions] = useState({ difficulty: 4, image: '' });
   const { randomImage, getRandomImage, loading, error } = useGetRandomImage();
 
   const handleDifficulty = (e) => {
-    setDifficulty(e.target.value)
+    setOptions({ ...options, difficulty: e.target.value })
   }
   const handleImage = (e) => {
-    setImage(e.target.src);
+    setOptions({ ...options, image: e.target.src })
   }
 
   useEffect(() => {
-    options(image, difficulty);
-  }, [image, difficulty, options])
+    getOptions(options);
+  }, [options])
 
   return (
     <div className="flex flex-col gap-y-8 items-center">
