@@ -40,13 +40,12 @@ export const Board = ({ isNewGame, gameOptions }) => {
   if (isNewGame) {
     // Remove previous game pieces.
     removeAllChilds(boardRef.current);
-    // Insert DOM as map method returns image.src as empty and do not why yet.
+    // Insert DOM as either map method and loop return image.src as empty and do not why yet.
     pieces.forEach((piece) => {
       // Add new pieces into the board.
       const container = document.createElement('div');
       container.appendChild(piece);
       boardRef.current.appendChild(container);
-      
     });
   }
 

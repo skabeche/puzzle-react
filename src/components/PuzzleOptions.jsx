@@ -45,7 +45,7 @@ export const PuzzleOptions = ({ getOptions }) => {
     setOptions({ ...options, difficulty: e.target.value })
   }
   const handleImage = (e) => {
-    setOptions({ ...options, image: e.target.src })
+    setOptions({ ...options, image: e.target.value })
   }
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export const PuzzleOptions = ({ getOptions }) => {
       <div className="difficulty flex gap-6">
         {
           levels.map((level) => {
-            return <Button className="px-4 py-2 border-2 border-white hover:bg-white hover:text-[#364852] rounded" key={level.value} onClick={handleDifficulty} value={level.value}>
+            return <Button className="px-4 py-2 border-2 border-white hover:bg-white hover:text-[#364852] rounded" key={level.value} onClick={handleDifficulty} value={level.value} clickable={true}>
               {level.label}
             </Button>
           })
@@ -66,14 +66,14 @@ export const PuzzleOptions = ({ getOptions }) => {
       <div className="images flex items-center gap-6 lg:w-1/2">
         {
           images.map((image) => {
-            return <Button className="border-2 border-transparent hover:border-white rounded" key={image.url}>
-              <img className="rounded" onClick={handleImage} src={image.url} alt={image.alt} />
+            return <Button className="border-2 border-transparent hover:border-white rounded" key={image.url} onClick={handleImage} value={image.url} clickable={true}>
+              <img className="rounded" src={image.url} alt={image.alt} />
             </Button>
           })
         }
 
-        {randomImage && <Button className="border-2 border-transparent hover:border-white rounded" key={randomImage?.url}>
-          <img className="rounded" onClick={handleImage} src={randomImage?.src?.large} alt={randomImage?.alt} />
+        {randomImage && <Button className="border-2 border-transparent hover:border-white rounded" key={randomImage?.url} onClick={handleImage} value={randomImage?.url} clickable={true}>
+          <img className="rounded" src={randomImage?.src?.large} alt={randomImage?.alt} />
         </Button>}
 
       </div>

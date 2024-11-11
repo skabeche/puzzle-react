@@ -21,6 +21,10 @@ a {
   @apply text-black hover:underline font-normal;
 }
 
+button.active {
+  @apply bg-white text-[#364852] border-white;
+}
+
 nav a {
   @apply text-black hover:text-gray-600 hover:no-underline;
 }
