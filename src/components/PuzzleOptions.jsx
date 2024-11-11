@@ -72,7 +72,7 @@ export const PuzzleOptions = ({ getOptions }) => {
           })
         }
 
-        {randomImage && <Button className="border-2 border-transparent hover:border-white rounded" key={randomImage?.url} onClick={handleImage} value={randomImage?.url} clickable={true}>
+        {randomImage && <Button className="border-2 border-transparent hover:border-white rounded" key={randomImage?.url} onClick={handleImage} value={randomImage?.src?.large} clickable={true}>
           <img className="rounded" src={randomImage?.src?.large} alt={randomImage?.alt} />
         </Button>}
 
