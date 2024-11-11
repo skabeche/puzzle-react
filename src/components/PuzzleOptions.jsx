@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "./Button";
 import { useGetRandomImage } from "../hooks/useGetRandomImage";
 import { Spinner } from "./Spinner";
+import { ImageIcon } from "./icons/ImageIcon";
 
 const levels = [
   {
@@ -40,6 +41,7 @@ const images = [
 export const PuzzleOptions = ({ getOptions }) => {
   const [options, setOptions] = useState({ difficulty: 4, image: '' });
   const { randomImage, getRandomImage, loading, error } = useGetRandomImage();
+  const showRandomImage = Object.keys(randomImage).length > 0 ? true : false;
 
   const handleDifficulty = (e) => {
     setOptions({ ...options, difficulty: e.target.value })
@@ -54,16 +56,16 @@ export const PuzzleOptions = ({ getOptions }) => {
 
   return (
     <div className="flex flex-col gap-y-8 items-center">
-      <div className="difficulty flex gap-6">
+      <div className="difficulty flex gap-2 md:gap-6">
         {
           levels.map((level) => {
-            return <Button className="px-4 py-2 border-2 border-white hover:bg-white hover:text-[#364852] rounded" key={level.value} onClick={handleDifficulty} value={level.value} clickable={true}>
+            return <Button className="px-2 md:px-4 py-2 border-2 border-white hover:bg-white hover:text-[#364852] rounded" key={level.value} onClick={handleDifficulty} value={level.value} clickable={true}>
               {level.label}
             </Button>
           })
         }
       </div>
-      <div className="images flex items-center gap-6 lg:w-1/2">
+      <div className="images grid grid-cols-2 lg:grid-cols-4 items-end gap-2 md:gap-6 w-[60%] lg:w-1/2">
         {
           images.map((image) => {
             return <Button className="border-2 border-transparent hover:border-white rounded" key={image.url} onClick={handleImage} value={image.url} clickable={true}>
@@ -72,14 +74,22 @@ export const PuzzleOptions = ({ getOptions }) => {
           })
         }
 
-        {randomImage && <Button className="border-2 border-transparent hover:border-white rounded" key={randomImage?.url} onClick={handleImage} value={randomImage?.src?.large} clickable={true}>
-          <img className="rounded" src={randomImage?.src?.large} alt={randomImage?.alt} />
-        </Button>}
+        {showRandomImage &&
+          <Button className="border-2 border-transparent hover:border-white rounded" key={randomImage?.url} onClick={handleImage} value={randomImage?.src?.large} clickable={true}>
+            <img className="rounded" src={randomImage?.src?.large} alt={randomImage?.alt} />
+          </Button>
+        }
+
+        {!showRandomImage &&
+          <Button className="flex items-center justify-center w-full h-full p-2 lg:p-4 text-sm border-2 border-white hover:bg-white hover:text-[#364852] rounded" onClick={getRandomImage} disabled={loading}>
+            <span className="inline-flex flex-col items-center gap-1">
+              {loading ? <Spinner /> : <ImageIcon />}
+              Random image
+            </span>
+          </Button>
+        }
 
       </div>
-      <Button className="flex items-center px-4 py-2 border-2 text-base border-white hover:bg-white hover:text-[#364852] hover:fill-[#364852] rounded" onClick={getRandomImage} disabled={loading}>
-        {loading ? <Spinner /> : ''} Load random image
-      </Button>
     </div>
   )
 }

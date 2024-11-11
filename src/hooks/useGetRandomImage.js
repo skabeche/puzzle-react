@@ -13,7 +13,7 @@ export function useGetRandomImage() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}?query=${query}&orientation=landscape&size=large&per_page=20`,
+        `${import.meta.env.VITE_API_BASE_URL}?query=${query}&orientation=square&size=large&per_page=20`,
         {
           headers: { 'Authorization': import.meta.env.VITE_API_KEY }
         });

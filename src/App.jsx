@@ -25,7 +25,7 @@ export default function App() {
         <Logo />
         <p>Puzzles are fun ways to pass the time that also provide a challenge for our brains. Choose the difficulty level and the image you prefer, enjoy!</p>
         <PuzzleOptions getOptions={getOptions} />
-        <a className="inline-flex items-center justify-center size-24 p-6 text-[#364852] bg-white uppercase font-semibold hover:no-underline rounded-full shadow-[_0_0_0_0_#ffffff] hover:shadow-[_0_0_0_7px_#364852]" onClick={newGame} href="#puzzle" accessKey="0">Start</a>
+        <a className="inline-flex items-center justify-center size-20 md:size-24 p-6 text-[#364852] bg-white uppercase font-semibold hover:no-underline rounded-full shadow-[_0_0_0_0_#ffffff] hover:shadow-[_0_0_0_7px_#364852]" onClick={newGame} href="#puzzle" accessKey="0">Start</a>
       </Header>
 
       <section id="puzzle" className="container my-12">
@@ -37,12 +37,12 @@ export default function App() {
           <Nav />
         </div>
 
-        <div className="flex gap-20 items-center">
-          <div>
+        <div className="flex gap-6 lg:gap-20 items-center">
+          <div className="grow">
             <Board isNewGame={isNewGame} gameOptions={gameOptions} />
           </div>
           <div>
-            {isNewGame && <img className="w-1/2" src={gameOptions.image} alt="Solution" />}
+            {isNewGame && <img className="lg:w-1/2" src={gameOptions.image} alt="Solution" />}
           </div>
         </div>
 
